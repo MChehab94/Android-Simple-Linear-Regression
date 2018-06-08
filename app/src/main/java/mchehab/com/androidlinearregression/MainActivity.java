@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
     private Button buttonPredict;
 
-    private Classifier tfClassifier;
+    private TFSimpleRegression tfSimpleRegression;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         textViewResult = findViewById(R.id.textView);
         buttonPredict = findViewById(R.id.buttonPredict);
 
-        tfClassifier = new Classifier(getApplicationContext());
+        tfSimpleRegression = new TFSimpleRegression(getApplicationContext());
 
         setButtonPredictListener();
     }
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private void setButtonPredictListener(){
         buttonPredict.setOnClickListener(e -> {
             float number = Float.parseFloat(editTextNumber.getText().toString());
-            float result[] = tfClassifier.predictProbabilities(new float[]{number});
+            float result[] = tfSimpleRegression.predict(new float[]{number});
             textViewResult.setText(result[0] + "");
         });
     }
